@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kashika N S — Software Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+  /* ---------------------------------------------------
+     TOKENS
+  --------------------------------------------------- */
+  :root{
+    --paper:      #EEF1EF;
+    --paper-alt:  #E2E8E4;
+    --white:      #FBFBF9;
+    --ink:        #16232E;
+    --ink-soft:   #4B5A63;
+    --line:       #2E5C8A;
+    --line-soft:  rgba(46,92,138,0.35);
+    --accent:     #C89A3D;
+
+    --serif:  'Fraunces', serif;
+    --mono:   'JetBrains Mono', monospace;
+    --sans:   'Inter', sans-serif;
+
+    --max: 1120px;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  html{scroll-behavior:smooth;}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
+  }
+
+  body{
+    background:
+      radial-gradient(circle, var(--line-soft) 1px, transparent 1px) 0 0/28px 28px,
+      var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:inherit;}
+  ::selection{background:var(--accent); color:var(--white);}
+  :focus-visible{outline:2px solid var(--line); outline-offset:3px;}
+
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 32px;}
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--line);
+  }
+
+  /* ---------------------------------------------------
+     NAV
+  --------------------------------------------------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(238,241,239,0.86);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line-soft);
+  }
+
+  nav{
+    max-width:var(--max);
+    margin:0 auto;
+    padding:18px 32px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+
+  .logo{font-family:var(--mono); font-size:14px; font-weight:600; letter-spacing:0.04em;}
+  .logo span{color:var(--line);}
+
+  .nav-links{
+    display:flex; gap:32px; list-style:none;
+    font-family:var(--mono); font-size:13px; letter-spacing:0.03em;
+  }
+  .nav-links a{text-decoration:none; position:relative; padding-bottom:2px;}
+  .nav-links a::after{
+    content:""; position:absolute; left:0; bottom:-3px;
+    width:0; height:1px; background:var(--line);
+    transition:width 0.25s ease;
+  }
+  .nav-links a:hover::after{width:100%;}
+
+  .nav-toggle{display:none; background:none; border:1px solid var(--ink); border-radius:2px; width:38px; height:34px; cursor:pointer;}
+  .nav-toggle span{display:block; width:18px; height:2px; background:var(--ink); margin:4px auto;}
+
+  @media (max-width:760px){
+    .nav-links{
+      position:absolute; top:100%; left:0; right:0;
+      flex-direction:column; gap:0;
+      background:var(--white);
+      border-bottom:1px solid var(--line-soft);
+      max-height:0; overflow:hidden;
+      transition:max-height 0.3s ease;
+    }
+    .nav-links.open{max-height:360px;}
+    .nav-links a{display:block; padding:14px 32px; border-top:1px solid var(--paper-alt);}
+    .nav-toggle{display:block;}
+  }
+
+  /* ---------------------------------------------------
+     HERO
+  --------------------------------------------------- */
+  .hero{padding:96px 0 64px; position:relative;}
+
+  .hero .wrap{
+    display:grid;
+    grid-template-columns:1.3fr 1fr;
+    gap:48px;
+    align-items:end;
+  }
+
+  .hero h1{
+    font-family:var(--serif);
+    font-weight:600;
+    font-size:clamp(38px, 6vw, 76px);
+    line-height:1.02;
+    letter-spacing:-0.01em;
+  }
+  .hero h1 em{font-style:italic; font-weight:300; color:var(--line);}
+
+  .hero p.role{
+    margin-top:20px;
+    font-size:19px;
+    color:var(--ink-soft);
+    max-width:50ch;
+  }
+
+  .hero-actions{margin-top:32px; display:flex; gap:16px; flex-wrap:wrap;}
+
+  .btn{
+    font-family:var(--mono);
+    font-size:13px;
+    letter-spacing:0.03em;
+    text-decoration:none;
+    padding:13px 22px;
+    border-radius:2px;
+    display:inline-block;
+    border:1px solid var(--ink);
+  }
+  .btn-solid{background:var(--ink); color:var(--white);}
+  .btn-solid:hover{background:var(--line); border-color:var(--line);}
+  .btn-line:hover{background:var(--ink); color:var(--white);}
+
+  .titleblock{
+    border:1px solid var(--ink);
+    background:var(--white);
+    position:relative;
+  }
+  .titleblock::before, .titleblock::after,
+  .titleblock .corner-br, .titleblock .corner-bl{
+    content:""; position:absolute; width:10px; height:10px; border:1px solid var(--line);
+  }
+  .titleblock::before{top:-1px; left:-1px; border-right:none; border-bottom:none;}
+  .titleblock::after{top:-1px; right:-1px; border-left:none; border-bottom:none;}
+  .titleblock .corner-bl{bottom:-1px; left:-1px; border-right:none; border-top:none;}
+  .titleblock .corner-br{bottom:-1px; right:-1px; border-left:none; border-top:none;}
+
+  .tb-row{
+    display:flex; justify-content:space-between;
+    padding:12px 18px;
+    border-bottom:1px solid var(--paper-alt);
+    font-family:var(--mono);
+    font-size:12.5px;
+    gap:12px;
+  }
+  .tb-row:last-child{border-bottom:none;}
+  .tb-row .k{color:var(--ink-soft); white-space:nowrap;}
+  .tb-row .v{font-weight:600; text-align:right;}
+
+  /* ---------------------------------------------------
+     SECTION HEADERS
+  --------------------------------------------------- */
+  section{padding:88px 0;}
+  section:nth-of-type(even){background:var(--paper-alt);}
+
+  .sheet-head{
+    display:flex; align-items:baseline; gap:18px;
+    margin-bottom:48px;
+    border-bottom:1px solid var(--ink);
+    padding-bottom:18px;
+  }
+  .sheet-head .num{
+    font-family:var(--mono); font-size:13px; color:var(--line);
+    border:1px solid var(--line); padding:3px 8px; border-radius:2px;
+  }
+  .sheet-head h2{
+    font-family:var(--serif); font-weight:600;
+    font-size:clamp(26px, 3.2vw, 38px);
+  }
+
+  /* ---------------------------------------------------
+     ABOUT
+  --------------------------------------------------- */
+  .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:56px;}
+  .about-grid p{margin-bottom:16px; color:var(--ink-soft); max-width:56ch;}
+  .about-grid p strong{color:var(--ink); font-weight:600;}
+
+  .stack-list{list-style:none; font-family:var(--mono); font-size:13.5px;}
+  .stack-list li{
+    display:flex; justify-content:space-between;
+    padding:10px 0;
+    border-bottom:1px dashed var(--line-soft);
+    gap:12px;
+  }
+  .stack-list li span:first-child{color:var(--ink-soft); white-space:nowrap;}
+  .stack-list li span:last-child{text-align:right;}
+
+  @media (max-width:760px){
+    .about-grid, .hero .wrap{grid-template-columns:1fr;}
+  }
+
+  /* ---------------------------------------------------
+     PROJECTS
+  --------------------------------------------------- */
+  .project-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:24px;}
+  @media (max-width:960px){ .project-grid{grid-template-columns:repeat(2, 1fr);} }
+  @media (max-width:640px){ .project-grid{grid-template-columns:1fr;} }
+
+  .card{
+    background:var(--white);
+    border:1px solid var(--ink);
+    padding:26px;
+    display:flex;
+    flex-direction:column;
+    transition:transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .card:hover{transform:translateY(-3px); box-shadow:6px 6px 0 var(--line-soft);}
+  .card-top{
+    display:flex; justify-content:space-between; align-items:start;
+    font-family:var(--mono); font-size:11.5px; color:var(--ink-soft);
+    margin-bottom:14px;
+  }
+  .rev{
+    border:1px solid var(--accent); color:var(--accent);
+    padding:2px 6px; border-radius:2px; letter-spacing:0.05em;
+  }
+  .card h3{font-family:var(--serif); font-weight:600; font-size:21px; margin-bottom:6px;}
+  .card .context{font-family:var(--mono); font-size:11px; color:var(--line); margin-bottom:12px;}
+  .card p{color:var(--ink-soft); font-size:14px; margin-bottom:16px; flex-grow:1;}
+  .tags{display:flex; flex-wrap:wrap; gap:8px;}
+  .tags span{
+    font-family:var(--mono); font-size:11px;
+    padding:4px 8px;
+    background:var(--paper);
+    border:1px solid var(--line-soft);
+    border-radius:2px;
+    color:var(--ink-soft);
+  }
+
+  /* ---------------------------------------------------
+     CERTIFICATIONS — logbook rows
+  --------------------------------------------------- */
+  .logbook{border:1px solid var(--ink); background:var(--white);}
+  .log-row{
+    display:grid;
+    grid-template-columns:110px 1fr 200px;
+    gap:16px;
+    padding:16px 22px;
+    border-bottom:1px solid var(--paper-alt);
+    font-size:14px;
+    align-items:center;
+  }
+  .log-row:last-child{border-bottom:none;}
+  .log-row .yr{font-family:var(--mono); font-size:12.5px; color:var(--line);}
+  .log-row .issuer{font-family:var(--mono); font-size:12px; color:var(--ink-soft); text-align:right;}
+  @media (max-width:700px){
+    .log-row{grid-template-columns:1fr; gap:4px;}
+    .log-row .issuer{text-align:left;}
+  }
+
+  .log-row .tags{margin-top:6px;}
+  .log-row .title-line{font-weight:500;}
+  .log-cat{
+    font-family:var(--mono); font-size:11px; letter-spacing:0.1em;
+    text-transform:uppercase; color:var(--ink-soft);
+    padding:18px 22px 8px;
+    border-bottom:1px solid var(--paper-alt);
+    background:var(--paper);
+  }
+
+  /* ---------------------------------------------------
+     EDUCATION
+  --------------------------------------------------- */
+  .edu-item{
+    border-left:2px solid var(--line);
+    padding:4px 0 4px 22px;
+    margin-bottom:28px;
+    position:relative;
+  }
+  .edu-item::before{
+    content:"";
+    position:absolute; left:-6px; top:6px;
+    width:10px; height:10px;
+    background:var(--line);
+    border-radius:50%;
+  }
+  .edu-item .yr{font-family:var(--mono); font-size:12px; color:var(--line);}
+  .edu-item h3{font-family:var(--serif); font-weight:600; font-size:20px; margin:4px 0;}
+  .edu-item p{color:var(--ink-soft); font-size:14px;}
+
+  /* ---------------------------------------------------
+     CONTACT
+  --------------------------------------------------- */
+  .contact-box{border:1px solid var(--ink); background:var(--white); padding:56px; text-align:center;}
+  .contact-box h2{
+    font-family:var(--serif); font-weight:600;
+    font-size:clamp(26px, 3.8vw, 42px);
+    margin-bottom:16px;
+  }
+  .contact-box p{color:var(--ink-soft); margin-bottom:28px;}
+  .contact-links{display:flex; justify-content:center; gap:14px; flex-wrap:wrap;}
+
+  footer{padding:32px 0; font-family:var(--mono); font-size:12px; color:var(--ink-soft); text-align:center;}
+
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo">K<span>/</span>NS</div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#work">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#certifications">Certifications</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">Portfolio — Sheet 00 / Cover</p>
+      <h1>Kashika N S<br><em>engineers software</em></h1>
+      <p class="role">Third-year CSE undergraduate exploring the space between AI/ML and embedded systems — building models, circuits, and games that all start from the same question: how does this actually work? Currently deepening skills in generative AI and responsible AI practice.</p>
+      <div class="hero-actions">
+        <a href="#work" class="btn btn-solid">View projects</a>
+        <a href="#contact" class="btn btn-line">Get in touch</a>
+        <a href="Kashika_NS_Resume.pdf" class="btn btn-line" target="_blank" rel="noopener">Download résumé</a>
+      </div>
+    </div>
+
+    <div class="titleblock">
+      <div class="corner-bl"></div><div class="corner-br"></div>
+      <div class="tb-row"><span class="k">Role</span><span class="v">Aspiring Software Engineer</span></div>
+      <div class="tb-row"><span class="k">Focus</span><span class="v">AI/ML, Gen AI &amp; Embedded Systems</span></div>
+      <div class="tb-row"><span class="k">Based</span><span class="v">Coimbatore, TN, India</span></div>
+      <div class="tb-row"><span class="k">Status</span><span class="v">#OpenToWork — Internships</span></div>
+      <div class="tb-row"><span class="k">Year</span><span class="v">3rd Yr B.E. CSE</span></div>
+      <div class="tb-row"><span class="k">Certifications</span><span class="v">10 completed</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sheet-head"><span class="num">01</span><h2>About</h2></div>
+    <div class="about-grid">
+      <div>
+        <p><strong>I'm a third-year Computer Science and Engineering student</strong> at Kumaraguru College of Technology, Coimbatore, working across Python, C, and C++ with hands-on project experience in machine learning, embedded systems, and application development.</p>
+        <p>I'm consistently self-driven about picking up new tools — six completed certifications so far, spanning AI, networking, databases, and hardware. I'm currently aiming for a Software Engineering internship where I can put strong problem-solving skills and a fast learning curve to work on real engineering problems.</p>
+        <p>Beyond coursework, I run <strong>Domain Sphere</strong>, a YouTube channel where I create and present technical content on emerging domains like automation &amp; AI, cybersecurity, healthcare tech, and gamification. Most recently, I've been deepening my grounding in generative AI — working directly with the Anthropic API and studying responsible AI practice.</p>
+      </div>
+      <ul class="stack-list">
+        <li><span>Languages</span><span>Python · Java · C · C++</span></li>
+        <li><span>Domains</span><span>ML &amp; AI, Full-Stack Dev</span></li>
+        <li><span>Domains</span><span>Embedded Systems, Cloud</span></li>
+        <li><span>Domains</span><span>3D Modelling, Networking</span></li>
+        <li><span>Gen AI</span><span>Anthropic API, Copilot, Ethics</span></li>
+        <li><span>Tools</span><span>Git, Raspberry Pi, Blender</span></li>
+        <li><span>Spoken</span><span>English · Tamil · French (basic)</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <div class="sheet-head"><span class="num">02</span><h2>Selected work</h2></div>
+    <div class="project-grid">
+
+      <div class="card">
+        <div class="card-top"><span>PROJECT / 01</span><span class="rev">ML</span></div>
+        <h3>Credit Card Fraud Detection</h3>
+        <div class="context">AI/ML Project</div>
+        <p>Engineered a machine learning classification model to flag fraudulent vs. legitimate credit card transactions, applying feature analysis and model evaluation techniques.</p>
+        <div class="tags"><span>Python</span><span>Classification</span><span>Feature Analysis</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-top"><span>PROJECT / 02</span><span class="rev">ML</span></div>
+        <h3>Weather Forecasting System</h3>
+        <div class="context">Grade 12 Project</div>
+        <p>Built a weather prediction system using data-driven forecasting methods — the technical foundation that carried into later AI/ML coursework and projects.</p>
+        <div class="tags"><span>Python</span><span>Forecasting</span><span>Data Analysis</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-top"><span>PROJECT / 03</span><span class="rev">GD</span></div>
+        <h3>IDIOMATRIX</h3>
+        <div class="context">Kumaraguru College of Technology</div>
+        <p>Conceptualized and documented a 22-page design for a puzzle-adventure game teaching idioms, proverbs, and metaphors through progressively difficult, culturally themed levels.</p>
+        <div class="tags"><span>Game Design</span><span>Narrative Design</span><span>Puzzle Logic</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="sheet-head"><span class="num">03</span><h2>Skills &amp; tools</h2></div>
+    <div class="about-grid">
+      <ul class="stack-list">
+        <li><span>Core languages</span><span>Python · Java</span></li>
+        <li><span>Core languages</span><span>C · C++</span></li>
+        <li><span>Machine Learning</span><span>Model building &amp; eval</span></li>
+        <li><span>Generative AI</span><span>Anthropic API, Copilot</span></li>
+        <li><span>AI Ethics</span><span>Responsible &amp; Ethical AI</span></li>
+        <li><span>Databases</span><span>DBMS fundamentals</span></li>
+      </ul>
+      <ul class="stack-list">
+        <li><span>Networking</span><span>Cisco Packet Tracer</span></li>
+        <li><span>Hardware</span><span>Raspberry Pi</span></li>
+        <li><span>3D Modelling</span><span>Blender</span></li>
+        <li><span>Content &amp; Comms</span><span>YouTube — Domain Sphere</span></li>
+        <li><span>Practice</span><span>GitHub · HackerRank · ByteXL</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="certifications">
+  <div class="wrap">
+    <div class="sheet-head"><span class="num">04</span><h2>Certifications</h2></div>
+    <p style="color:var(--ink-soft); max-width:70ch; margin:-28px 0 32px;">10 completed, spanning generative AI, networking, hardware, and data — six of them earned in the last two weeks.</p>
+
+    <div class="logbook">
+      <div class="log-cat">Generative &amp; Applied AI</div>
+
+      <div class="log-row">
+        <span class="yr">Jul 2026</span>
+        <div>
+          <div class="title-line">Career Essentials in Generative AI by Microsoft and LinkedIn — Learning Path, 4h 18m</div>
+          <div class="tags"><span>Microsoft Copilot</span><span>Generative AI</span><span>Responsible AI</span></div>
+        </div>
+        <span class="issuer">Microsoft &amp; LinkedIn Learning</span>
+      </div>
+      <div class="log-row">
+        <span class="yr">Jul 2026</span>
+        <div>
+          <div class="title-line">Claude with the Anthropic API</div>
+          <div class="tags"><span>LLM APIs</span><span>Applied AI</span></div>
+        </div>
+        <span class="issuer">Anthropic</span>
+      </div>
+      <div class="log-row">
+        <span class="yr">Jul 2026</span>
+        <div>
+          <div class="title-line">Ethics in the Age of Generative AI</div>
+          <div class="tags"><span>Computer Ethics</span><span>Responsible AI</span></div>
+        </div>
+        <span class="issuer">LinkedIn Learning</span>
+      </div>
+      <div class="log-row">
+        <span class="yr">Jul 2026</span>
+        <div>
+          <div class="title-line">What Is Generative AI?</div>
+          <div class="tags"><span>Generative AI Tools</span><span>Artificial Intelligence</span></div>
+        </div>
+        <span class="issuer">LinkedIn Learning</span>
+      </div>
+      <div class="log-row">
+        <span class="yr">Jun 2026</span>
+        <div>
+          <div class="title-line">Foundational Course on Applied Machine Learning and AI — 1,934 hrs, NCVET-recognised</div>
+          <div class="tags"><span>Machine Learning</span><span>AI Fundamentals</span></div>
+        </div>
+        <span class="issuer">Confederation of Indian Industry (CII), IndiaAI</span>
+      </div>
+
+      <div class="log-cat">Networking</div>
+
+      <div class="log-row">
+        <span class="yr">Jan 2026</span>
+        <div class="title-line">Getting Started with Cisco Packet Tracer</div>
+        <span class="issuer">Cisco Networking Academy</span>
+      </div>
+      <div class="log-row">
+        <span class="yr">Jan 2026</span>
+        <div class="title-line">Exploring Networking with Cisco Packet Tracer</div>
+        <span class="issuer">Cisco Networking Academy</span>
+      </div>
+
+      <div class="log-cat">Systems, Hardware &amp; Design</div>
+
+      <div class="log-row">
+        <span class="yr">Aug 2025</span>
+        <div class="title-line">Database Management System Part 1</div>
+        <span class="issuer">Infosys Springboard</span>
+      </div>
+      <div class="log-row">
+        <span class="yr">Apr 2025</span>
+        <div class="title-line">Foundations of 3D Modelling in Blender</div>
+        <span class="issuer">Packt, via Coursera</span>
+      </div>
+      <div class="log-row">
+        <span class="yr">Apr 2025</span>
+        <div class="title-line">Beginning Custom Projects with Raspberry Pi — with Honors</div>
+        <span class="issuer">Johns Hopkins University, via Coursera</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="sheet-head"><span class="num">05</span><h2>Education</h2></div>
+
+    <div class="edu-item">
+      <span class="yr">2024 — 2028 (Expected)</span>
+      <h3>Bachelor of Engineering — Computer Science and Engineering</h3>
+      <p>Kumaraguru College of Technology, Coimbatore · 3rd Year</p>
+    </div>
+
+    <div class="edu-item">
+      <span class="yr">2024</span>
+      <h3>Senior School Certificate Examination (Class XII), CBSE — 84.4%</h3>
+      <p>SH Sarasswathi Vidh Mandheer School, Mettupalayam, TN</p>
+    </div>
+
+    <div class="edu-item">
+      <span class="yr">2022</span>
+      <h3>Secondary School Examination (Class X), CBSE — 89.2%</h3>
+      <p>SH Sarasswathi Vidh Mandheer School, Mettupalayam, TN</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-box">
+      <p class="eyebrow" style="margin-bottom:12px;">Sheet 06 — Contact</p>
+      <h2>Let's build something.</h2>
+      <p>Open to Software Engineering internships and collaborative projects. Usually replies within a day.</p>
+      <div class="contact-links">
+        <a href="mailto:kashikasampathkumar@gmail.com" class="btn btn-solid">kashikasampathkumar@gmail.com</a>
+        <a href="tel:+917904335564" class="btn btn-line">+91 79043 35564</a>
+        <a href="https://linkedin.com/in/kashika-ns-17548527b" class="btn btn-line" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">© 2026 Kashika N S. Built by hand with HTML &amp; CSS.</div>
+</footer>
+
+<script>
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => {
+    const open = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+  });
+  links.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      links.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>
+
+</body>
+</html>
